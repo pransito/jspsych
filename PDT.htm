@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jspsych-5.0.3/jspsych.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+  </body>
+  <script>
+  
+  /* functions */
+  var post_trial_gap = function() {
+    return Math.floor( Math.random() * 1500 ) + 750;
+  }
+
+  /* define welcome message block */
+  var welcome_block = {
+    type: "text",
+    text: "Welcome to the experiment. Press any key to begin."
+  };
+
+  /* define instructions block */
+  var instructions_block = {
+    type: "text",
+    text: "<p>In this experiment, a picture will appear in the center " +
+        "of the screen.</p><p>Memorize the picture. " +
+        "In the end you will be quizzed about the pictures.</p>" +
+        "<p>Afterwards you will see a gamble superimposed on the picture. Decide " +
+        " if you want to accept the gamble or not.</p>" +
+        "<p>Next, indicate your answer on a 4-point scale " +
+        "(yes, somewhat yes, somewhat no, no).</p>" +
+        "<p>Then a new trial will begin.</p>" +
+        "<p>Press any key to begin.</p>",
+    timing_post_trial: 2000
+  };
+  
+  /* all picture stimuli */
+  var pic_stimuli = ["img_PDT/10202.jpg","img_PDT/10606.jpg","img_PDT/30205.jpg"];
+  var rand_pics   = jsPsych.randomization.repeat(pic_stimuli, 1);
+  
+  /* gain stimuli */
+  var gains      = ['10','11','12'];
+  var rand_gains = jsPsych.randomization.repeat(gains, 1);
+  
+  /* loss stimuli */
+  var loss      = ['-10','-11','-12'];
+  var rand_loss = jsPsych.randomization.repeat(loss, 1);
+  
+  
+  /* make the timeline for each trial*/
+  var all_trials = [];
+  for (ii = 0; ii < rand_pics.length; ii++) {
+	/* initialize new trial */
+	cur_trial = [];
+	/* cur pic stimulus */
+	pic_obj = 
+	{
+	  stimulus: 			rand_pics[ii],
+	  choices: 				[],
+	  timing_response: 		1500,
+	  timing_post_trial: 	post_trial_gap,
+	  data: 				{name: rand_pics[ii]}
+	}
+	/* cur gain stimulus */
+	str1     = "<p>";
+	str3     = "</p>";
+	cur_stim = str1.concat(rand_gains[ii]);
+	cur_stim = cur_stim.concat(str3);
+	gain_obj =  
+	{
+	  stimulus: 			cur_stim,
+	  choices: 				['V','B','N','M'],
+	  is_html:				true,
+	  timing_response: 		1500,
+	  timing_post_trial: 	post_trial_gap,
+	  data: 				{name: rand_gains[ii]}
+	}
+	/* put into one trial */
+	cur_trial = {
+	  type:		"single-stim",
+	  timeline:	[pic_obj,gain_obj]
+	}
+	/* append on other trials */
+	all_trials.push(cur_trial)
+  }
+  
+  /* all goes into the core test block */
+  var test_block = {
+    type: "single-stim",
+    timeline: all_trials
+  };
+  
+  /* create experiment timeline array */
+  var timeline = [];
+  timeline.push(welcome_block);
+  timeline.push(instructions_block);
+  timeline.push(test_block);
+
+  /* start the experiment */
+  jsPsych.init({
+    timeline: timeline,
+    on_finish: function() {
+      jsPsych.data.displayData();
+    }
+  });
+</script>
+</html>

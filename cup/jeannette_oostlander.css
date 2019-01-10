@@ -1,0 +1,45 @@
+body   { color: #000; font-style: normal; font-weight: normal; font-size: 11px; font-family: Geneva, Arial, Helvetica, sans-serif;}
+
+a:link  { color: #000000; font-size: 11px; font-family: Geneva, Arial, Helvetica, sans-serif }
+a:visited  { color: #000000; font-size: 11px; font-family: Geneva, Arial, Helvetica, sans-serif }
+
+
+table { 
+	background-color: #4A708B  ;
+	border-width: 0px;
+	border-color: #1e606e;
+	border-style:solid;
+}
+
+td { 
+	padding: 5px;
+	font-size: 14px;
+	text-align: left; 
+	font-style: normal; 
+	font-weight: normal; 
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+
+.titel {
+	background-color: #99cccc;
+	text-align: center; 
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	font-variant: normal;
+	color: #000000;
+}
+
+.button {
+	border-color: #000000;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #000000;
+	background-color: #ffffff;
+}

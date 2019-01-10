@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+  <head>
+    <title>A WEXTOR experiment</title>
+    <meta name="AUTHOR" content="WEXTOR">
+    <meta name="ROBOTS" content="NONE">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="Thursday, 1-Jan-1991 01:01:01 GMT">
+    <meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+    <link rel="stylesheet" href="../jeannette_oostlander.css">
+    <script src="../scripts.js" type="text/javascript" language="Javascript"></script>
+    <script language="JavaScript" type="text/javascript">
+    
+      var id = get_variable_value("id"); 
+      var fuenf;
+      var passed_validation = false;
+      var validation_kicked_in_text = '';
+      var items = ['quest'];
+      function fill_id() {
+        time1 = new Date();
+        fuenf = document.URL.substring(document.URL.indexOf("id=")+3,document.URL.indexOf("id=")+9);
+      }
+
+      function next_page() {
+        if (!all_answered(items) && !passed_validation) {
+          alert('There are unanswered questions on this page.\n\nNote: This message only appears once per page. If you don\'t want to answer all questions, just submit the form again to proceed.');
+          document.getElementById("submit_button").style.display = "";
+          passed_validation = true;
+          return false;
+        }
+        if (passed_validation) {
+          validation_kicked_in = 1;
+        } else {
+          validation_kicked_in = 0;
+        }
+        validation_kicked_in_text = '&validation_kicked_in_3=' + validation_kicked_in;
+
+        time2 = new Date();
+        var rt = (time2.getTime() - time1.getTime());
+        self.location = "thank.html"+"?id="+id+get_forms()+"&rt_3="+rt + validation_kicked_in_text;
+      }
+    </script>
+    <!--
+      This Web experiment was created with WEXTOR, a Web-based tool for generating and visualizing experimental designs and procedures
+      Copyright (c) 2000-2017, Ulf-Dietrich Reips, Thomas Blumer & Christoph Neuhaus
+      Available at http://wextor.org/
+    -->
+    </head>
+
+  <body onload="fill_id()">
+    <form name="pumpernickel" method="get"><input type="hidden" name="vi_3" value="1">
+      <center>
+        <table border="0" cellpadding="4" cellspacing="8" width="500">
+          <tr>
+            <td>
+              <table border="0" cellpadding="2" cellspacing="0" width="500">
+                <tr>
+                  <td colspan="3" class="titel"><b>Please read below</b></td>
+                </tr>  
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table border="0" cellpadding="2" cellspacing="0" width="500">
+                <tr>
+                  <td colspan="3">Imagine a 4-ounce cup in front of you that is completely filled with water up to the 4-ounce line. You then leave the room and come back to find that the water is now at the 2-ounce line.</td>
+                </tr>  
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table border="0" cellpadding="2" cellspacing="0" width="500">
+                <tr>
+                  <td colspan="3">What is the most natural way to describe the cup now?</td>
+                </tr>
+                <tr>
+                  <td colspan="3"><input type="radio" value="0" name="quest"> The cup is 1/2 full.</td>
+                </tr>
+                <tr>
+                  <td colspan="3"><input type="radio" value="1" name="quest"> The cup is 1/2 empty.</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table border="0" cellpadding="2" cellspacing="0" width="500">
+                <tr>
+                  <td colspan="3">
+                    <input id="submit_button" type="button" value="next" onclick="next_page()" class="button">
+                  </td>
+                </tr>  
+              </table>
+            </td>
+          </tr>
+        </table>
+      </center>
+    </form>
+  </body>
+</html>
